@@ -8,8 +8,19 @@
          
          <servlet-name>googleapp</servlet-name>
          <servlet-class>googleapp.googleServlet</servlet-class>
-		</servlet>         
+		</servlet> 
+		
+		<servlet>
+			<servlet-name>sign</servlet-name>
+			
+			<servlet-class>googleapp.SigngoogleappServlet</servlet-class>        
          
+         </servlet>
+         
+         <servlet-mapping>
+         	<servlet-name>sign</servlet-name>
+         	<url-pattern>/sign</url-pattern>
+         </servlet-mapping>
          
          <servlet-mapping>
          
@@ -21,6 +32,7 @@
          
   <welcome-file-list>
     
-    <welcome-file>index.html</welcome-file>
+   
+    <welcome-file>googleAppProject.jsp</welcome-file>
   </welcome-file-list>
 </web-app>
