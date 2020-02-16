@@ -15,10 +15,18 @@
 <html>
 
 <head>
-
+	<link type="text/css" rel="stylesheet"
+href="/stylesheets/main.css"/>
 </head>
 
 <body>
+
+  <h1>Basic BlogSpot</h1>       
+
+  <div class="loginbuttondiv">
+  <a href="/sign" class="loginbutton">Login</a>
+  <a href="/sign" class="loginbutton">Continue without logging in</a>
+  </div>
 
 <% 
 
