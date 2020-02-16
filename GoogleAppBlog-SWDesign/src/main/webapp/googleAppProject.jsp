@@ -23,9 +23,9 @@
 <% 
 
 	String googleappName = request.getParameter("googleappName");
-	/* if(googleappName==null){
+	if(googleappName==null){
 		googleappName = "default";
-	} */
+	}
 	
 	pageContext.setAttribute("googleappName",googleappName);
 	
@@ -91,7 +91,7 @@ Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 	<div><textarea name="content" rows="3" cols="60"></textarea></div>
 	
 	<%if(user != null){ %>
-		<div><input type="su bmit" value="Post Blog" ></div>
+		<div><input type="submit" value="Post Blog" ></div>
 	<%} %>
 	
 	<input type="hidden" name="googleappName" value="${fn:escapeXml(googleappName)}"/>
