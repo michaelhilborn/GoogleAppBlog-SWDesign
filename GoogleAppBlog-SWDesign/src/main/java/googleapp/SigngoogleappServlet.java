@@ -38,13 +38,14 @@ public class SigngoogleappServlet extends HttpServlet {
 		
 		Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 		
-		
+		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		Date date = new Date();
 		Entity greeting = new Entity("Greeting",googleappKey);
 		greeting.setProperty("user",user);
 		greeting.setProperty("date", date);
 		greeting.setProperty("content", content);
+		greeting.setProperty("title", title);
 		
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();

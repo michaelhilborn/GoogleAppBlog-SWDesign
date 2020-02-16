@@ -23,9 +23,9 @@
 <% 
 
 	String googleappName = request.getParameter("googleappName");
-	if(googleappName==null){
+	/* if(googleappName==null){
 		googleappName = "default";
-	}
+	} */
 	
 	pageContext.setAttribute("googleappName",googleappName);
 	
@@ -64,6 +64,7 @@ Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 	<p>Most recent Blogs from BasicBlogSpot'${fn:escapeXml(googleappName)}'.</p>
 	<%
 	for(Entity greeting: greetings){
+		pageContext.setAttribute("blog_title", greeting.getProperty("title"));
 		pageContext.setAttribute("greeting_content",
 						greeting.getProperty("content"));
 		if(greeting.getProperty("user")==null){
@@ -78,6 +79,7 @@ Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 			<%
 			}
 			%>
+			<h4><b>${fn:escapeXml(blog_title)}</b></h4>
 			<blockquote>${fn:escapeXml(greeting_content)}</blockquote>
 			<%
 			}
@@ -85,11 +87,11 @@ Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 			%>
 
 <form action="/sign" method="post">
-	<div><input type="text" value="Blog Title" onfocus="if (this.value == 'Blog Title') {this.value=''}" /></div>
+	<div><textarea name="title" rows="1" cols="60"></textarea></div>
 	<div><textarea name="content" rows="3" cols="60"></textarea></div>
 	
 	<%if(user != null){ %>
-		<div><input type="submit" value="Post Blog" ></div>
+		<div><input type="su bmit" value="Post Blog" ></div>
 	<%} %>
 	
 	<input type="hidden" name="googleappName" value="${fn:escapeXml(googleappName)}"/>
