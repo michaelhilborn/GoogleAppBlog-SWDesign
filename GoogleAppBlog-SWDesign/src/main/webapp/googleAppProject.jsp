@@ -42,7 +42,7 @@
 %>
 <p>Hello!
 <a href="<%= userService.createLoginURL(request.getRequestURI())%>">Sign in</a>
-to include your name with greetings you post.</p>
+so that you can post a blog!</p>
 <% 
 }
 %>
@@ -61,7 +61,7 @@ Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 	<%
 	} else{
 	%>
-	<p>Messages in googleapp'${fn:escapeXml(googleappName)}'.</p>
+	<p>Most recent Blogs from BasicBlogSpot'${fn:escapeXml(googleappName)}'.</p>
 	<%
 	for(Entity greeting: greetings){
 		pageContext.setAttribute("greeting_content",
@@ -85,9 +85,12 @@ Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 			%>
 
 <form action="/sign" method="post">
-	<div><textarea name="content" rows="3" cols="60">
-</textarea></div>
-	<div><input type="submit" value="Post Greeting" ></div>
+	<div><input type="text" value="Blog Title" onfocus="if (this.value == 'Blog Title') {this.value=''}" /></div>
+	<div><textarea name="content" rows="3" cols="60"></textarea></div>
+	
+	<%if(user != null){ %>
+		<div><input type="submit" value="Post Blog" ></div>
+	<%} %>
 	
 	<input type="hidden" name="googleappName" value="${fn:escapeXml(googleappName)}"/>
 </form>
