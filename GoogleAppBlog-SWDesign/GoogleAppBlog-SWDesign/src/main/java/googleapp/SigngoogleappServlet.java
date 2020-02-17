@@ -54,7 +54,7 @@ public class SigngoogleappServlet extends HttpServlet {
 			
 		
 		resp.sendRedirect("/googleAppProject.jsp? googleappName="+ googleappName);
-		}
-						
 	}
+						
+}
 
