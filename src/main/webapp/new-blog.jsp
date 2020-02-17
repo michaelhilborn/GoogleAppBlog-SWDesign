@@ -39,7 +39,7 @@ href="/stylesheets/main.css"/>
 %>
   <div class="loginbuttondiv">
   	<a id="loginButt" href="<%= userService.createLogoutURL(request.getRequestURI()) %>" class="loginbutton">Log Out</a>
-    <a href="/new-blog.jsp" class="writeBlogButt">Write Blog</a>
+    <a href="/new-blog.html" class="writeBlogButt">Write Blog</a>
   </div>  
 <%
 	}else {
@@ -52,45 +52,18 @@ href="/stylesheets/main.css"/>
 }
 %>
   <h1>Basic BlogSpot</h1>
-<%
-DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
-// run an ancestore query to ensure we see the most up-to-date
-// view of the greetings belonging to the selected googleapp
+	<form id="newBlog" class="blog-popup" action="/sign" method="post">
 
-	Query query = new Query("Greeting",googleappKey).addSort("user",Query.SortDirection.DESCENDING).addSort("date", Query.SortDirection.DESCENDING);
-	List<Entity> greetings = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
-	if(greetings.isEmpty()){
-%>
-	<p>googleapp '${fn:escapeXml(googleappName)}' has no messages.</p>
-	<%
-	} else{
-	%>
-	<p>Most recent Blogs from BasicBlogSpot'${fn:escapeXml(googleappName)}'.</p>
-	<%
-	for(Entity greeting: greetings){
-		pageContext.setAttribute("blog_title", greeting.getProperty("title"));
-		pageContext.setAttribute("greeting_content",
-						greeting.getProperty("content"));
-		pageContext.setAttribute("greeting_user",
-				greeting.getProperty("user"));
-		pageContext.setAttribute("blog_date",
-				greeting.getProperty("date"));
-		%>
-		<div class = "blogPost">
-
-			<h4><b><u>${fn:escapeXml(blog_title)}</u></b> -by ${fn:escapeXml(greeting_user.nickname)}</h4>
-			
-			<blockquote>${fn:escapeXml(greeting_content)}</blockquote>
-			
-			<p>Posted on ${fn:escapeXml(blog_date)}</p>
-		</div>
-			<%
-			}
-		}
-			%>
-			
-	<a href = "/blog-history.jsp">View All Blogs</a>
-</body>
-</html>
+		<label for="title"><b>Title of Blog</b></label>
+		<div><input type="text" placeholder ="Title of Blog" name="title" required/></div>
 	
+		<label for="content"><b>Body of Blog</b></label>
+    	<div><textarea name="content" rows="3" cols="60"></textarea></div>
+
+    	<div><input type="submit" value="Post Blog" /></div>
+    	<a href="/googleAppProject.jsp">Return to Landing Page</a>
+
+    	<input type="hidden" name="googleappName" value="${fn:escapeXml(googleappName)}"/>
+
+	</form>
+</body>

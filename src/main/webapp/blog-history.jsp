@@ -31,6 +31,7 @@ href="/stylesheets/main.css"/>
 	pageContext.setAttribute("googleappName",googleappName);
 	
 
+
 	UserService userService = UserServiceFactory.getUserService();
 	User user = userService.getCurrentUser();
 	
@@ -59,7 +60,7 @@ Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 // view of the greetings belonging to the selected googleapp
 
 	Query query = new Query("Greeting",googleappKey).addSort("user",Query.SortDirection.DESCENDING).addSort("date", Query.SortDirection.DESCENDING);
-	List<Entity> greetings = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
+	List<Entity> greetings = datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
 	if(greetings.isEmpty()){
 %>
 	<p>googleapp '${fn:escapeXml(googleappName)}' has no messages.</p>
@@ -89,8 +90,7 @@ Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 			}
 		}
 			%>
-			
-	<a href = "/blog-history.jsp">View All Blogs</a>
+			<a href="/googleAppProject.jsp">Return to Landing Page</a>
 </body>
 </html>
 	

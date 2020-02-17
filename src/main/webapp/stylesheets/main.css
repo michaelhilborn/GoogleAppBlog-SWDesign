@@ -30,15 +30,10 @@ h1{
 	text-align: right;
 	margin-right: 20px;
 }
-.blog-popup{
-  display: none;
-  position: fixed;
-  bottom: 0;
-  right: 15px;
-  border: 3px solid #f1f1f1;
-  z-index: 3;
+.blogPost{
+	background-color: #FFF5EE;
+	border-style:solid;
 }
-
 .loginbuttondiv{
   	margin-top:10px;
   	width:100%;
