@@ -35,6 +35,9 @@ public class SigngoogleappServlet extends HttpServlet {
 		// greetings for a given guestbook. however the write rate to each
 		// guestbook should be limited to ~1/second.
 		
+		String emailName = req.getParameter("googleappName");
+		Key emailKey = KeyFactory.createKey("emailName", emailName);
+		
 		String googleappName = req.getParameter("googleappName");
 		
 		Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
@@ -48,11 +51,16 @@ public class SigngoogleappServlet extends HttpServlet {
 		greeting.setProperty("content", content);
 		greeting.setProperty("title", title);
 		
+		Entity newPost = new Entity("Email", emailKey);
+		newPost.setProperty("user", user);
+		newPost.setProperty("title", title);
+		
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(greeting);
 			
-			
+		DatastoreService emailDataStore = DatastoreServiceFactory.getDatastoreService();
+		emailDataStore.put(newPost);
 		
 		resp.sendRedirect("/googleAppProject.jsp?googleappName=" + googleappName);
 		

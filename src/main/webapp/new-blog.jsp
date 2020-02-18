@@ -51,7 +51,9 @@ href="/stylesheets/main.css"/>
 <%		
 }
 %>
+  <div class ="Headline">
   <h1>Basic BlogSpot</h1>
+</div>
 	<form id="newBlog" class="blog-popup" action="/sign" method="post">
 
 		<label for="title"><b>Title of Blog</b></label>

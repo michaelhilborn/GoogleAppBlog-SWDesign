@@ -51,7 +51,9 @@ href="/stylesheets/main.css"/>
 <%		
 }
 %>
+<div class ="Headline">
   <h1>Basic BlogSpot</h1>
+</div>
 <%
 DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
@@ -62,7 +64,7 @@ Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 	List<Entity> greetings = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
 	if(greetings.isEmpty()){
 %>
-	<p>googleapp '${fn:escapeXml(googleappName)}' has no messages.</p>
+	<p>Basic BlogSpot currently has no blogs posted :'(</p>
 	<%
 	} else{
 	%>
@@ -91,6 +93,68 @@ Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 			%>
 			
 	<a href = "/blog-history.jsp">View All Blogs</a>
+	
+	<%
+	DatastoreService commentDataStore = DatastoreServiceFactory.getDatastoreService();
+	Key commentGoogleAppKey = KeyFactory.createKey("appComments",googleappName);
+	// run an ancestore query to ensure we see the most up-to-date
+	// view of the greetings belonging to the selected googleapp
+
+	Query commentQuery = new Query("Comment",commentGoogleAppKey).addSort("date", Query.SortDirection.DESCENDING);
+	List<Entity> comments = commentDataStore.prepare(commentQuery).asList(FetchOptions.Builder.withLimit(3));
+	%>
+	<h3><b><u>Comment Section</u></b></h3>
+	<%
+	for(Entity comment: comments){
+		pageContext.setAttribute("comment",
+						comment.getProperty("comment"));
+		pageContext.setAttribute("comment_date",
+				comment.getProperty("date"));
+	%>
+		<div class = "commentPost">
+			
+			<blockquote>${fn:escapeXml(comment)}</blockquote>
+			
+			<p>Posted on ${fn:escapeXml(comment_date)}</p>
+		</div>
+	<%
+	}
+	%>
+	<form id="newComment" action="/writecomment" method="post">
+
+		<label for="content"><b>Comment:</b></label>
+    	<div><textarea name="content" rows="3" cols="60"></textarea></div>
+
+    	<div><input type="submit" value="Post Comment" /></div>
+    	<input type="hidden" name="googleappName" value="${fn:escapeXml(googleappName)}"/>
+
+	</form>
+	<button onclick="subscribe()">Subscribe</button>
+	<button onclick="unsubscribe()">Unsubscribe</button>
 </body>
+<script>
+function subscribe(){
+	<%
+	
+	Key subscriberKey = KeyFactory.createKey("Subscribers",googleappName);
+	Entity subscriber = new Entity("Subscriber",googleappKey);
+	subscriber.setProperty("email", user);
+	DatastoreService subscriberDatastore = DatastoreServiceFactory.getDatastoreService();
+	subscriberDatastore.put(subscriber);
+	
+	%>
+}
+
+function unsubscribe(){
+<%
+	
+	Key unsubscriberKey = KeyFactory.createKey("Subscribers",googleappName);
+	DatastoreService unsubscriberDatastore = DatastoreServiceFactory.getDatastoreService();
+	unsubscriberDatastore.delete(unsubscriberKey);
+	
+	%>
+}
+
+</script>
 </html>
 	

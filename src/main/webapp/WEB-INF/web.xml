@@ -8,14 +8,25 @@
          
          <servlet-name>googleapp</servlet-name>
          <servlet-class>googleapp.googleServlet</servlet-class>
-		</servlet> 
-		
-		<servlet>
-			<servlet-name>sign</servlet-name>
-			
-			<servlet-class>googleapp.SigngoogleappServlet</servlet-class>        
+		</servlet>
+ 
+				<servlet>
+                <servlet-name>cronServlet</servlet-name>
+                <servlet-class>googleapp.cronServlet</servlet-class>
+                </servlet>
+
          
+         
+         <servlet>
+			<servlet-name>sign</servlet-name>	
+			<servlet-class>googleapp.SigngoogleappServlet</servlet-class>        
          </servlet>
+         
+         <servlet-mapping>
+         <servlet-name>cronServlet</servlet-name>
+         <!--   not really certain what this specific part does-->
+         <url-pattern>/cronJob</url-pattern>
+         </servlet-mapping>
          
          <servlet-mapping>
          	<servlet-name>sign</servlet-name>
@@ -26,7 +37,7 @@
          
          	<servlet-name>googleapp</servlet-name>
          	
-         	<url-pattern>/writeblog</url-pattern>
+         	<url-pattern>/writecomment</url-pattern>
          	
          </servlet-mapping>
          

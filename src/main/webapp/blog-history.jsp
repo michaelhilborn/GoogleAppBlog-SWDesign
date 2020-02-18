@@ -52,7 +52,9 @@ href="/stylesheets/main.css"/>
 <%		
 }
 %>
+  <div class ="Headline">
   <h1>Basic BlogSpot</h1>
+</div>
 <%
 DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 Key googleappKey = KeyFactory.createKey("googleapp",googleappName);

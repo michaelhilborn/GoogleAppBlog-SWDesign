@@ -3,7 +3,7 @@ body {
 }
 
 
-h1{
+.Headline{
   margin-top: 10px;
   text-align:center;
   background-image: url("https://images-na.ssl-images-amazon.com/images/I/81WNXvACUhL._SL1500_.jpg");
@@ -12,6 +12,9 @@ h1{
   background-position:center;
   color:white;
   size: 80px;
+  height: 80px;
+  width:60%;
+  margin-left:20%;
   }
   
 .loginbutton, .writeBlogButt{
@@ -33,6 +36,14 @@ h1{
 .blogPost{
 	background-color: #FFF5EE;
 	border-style:solid;
+}
+.commentPost{
+	background-color: #FFFFFF;
+	border-style:solid;
+	border-radius:25px;
+	width:50%;
+  	margin: auto;
+	vertical-align: center;
 }
 .loginbuttondiv{
   	margin-top:10px;

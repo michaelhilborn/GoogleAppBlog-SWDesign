@@ -19,7 +19,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 public class googleServlet extends HttpServlet{
 	
 	
-	public void doGet(HttpServletRequest req,HttpServletResponse resp)
+	public void doPost(HttpServletRequest req,HttpServletResponse resp)
 		throws IOException{
 		
 		UserService userService = UserServiceFactory.getUserService();
@@ -33,20 +33,17 @@ public class googleServlet extends HttpServlet{
 		
 		String googleappName = req.getParameter("googleappName");
 		
-		Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
+		Key googleappKey = KeyFactory.createKey("appComments",googleappName);
 		
-		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		Date date = new Date();
-		Entity greeting = new Entity("Greeting",googleappKey);
-		greeting.setProperty("user",user);
-		greeting.setProperty("date", date);
-		greeting.setProperty("content", content);
-		greeting.setProperty("title", title);
+		Entity comment = new Entity("Comment",googleappKey);
+		comment.setProperty("date", date);
+		comment.setProperty("comment", content);
 		
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-			datastore.put(greeting);
+			datastore.put(comment);
 			
 			
 		
