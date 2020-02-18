@@ -46,44 +46,16 @@ public class cronServlet extends HttpServlet{
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		try {
-			_logger.info("cron job has been executed");
-			 String emailName = req.getParameter("googleappName");
-			
 			  Message msg = new MimeMessage(session);
-			  msg.setFrom(new InternetAddress("michaelthilborn@gmail.com", "BlogSpot Project"));
-			  
-			  DatastoreService dataStore = DatastoreServiceFactory.getDatastoreService();
-			  Key subscriberKey = KeyFactory.createKey("Subscribers", emailName);
-
-				Query subscriberQuery = new Query("Subscriber", subscriberKey);
-				List<Entity> subscribers = dataStore.prepare(subscriberQuery).asList(FetchOptions.Builder.withDefaults());
-				for(Entity sub: subscribers){
-					msg.addRecipient(Message.RecipientType.TO,
-			                   new InternetAddress((String) sub.getProperty("email") + "@gmail.com", "Subscriber"));
-					_logger.info("cron job has been executed");
-				}
-		
-			  msg.setSubject("Blogs posted in last 24 hours on Blog Spot");
-			  
-			  String body = new String();
-			  
-			  Key emailKey = KeyFactory.createKey("emailName", emailName);
-
-				Query commentQuery = new Query("Email", emailKey).addSort("date", Query.SortDirection.DESCENDING);
-				List<Entity> emails = dataStore.prepare(commentQuery).asList(FetchOptions.Builder.withDefaults());
-				for(Entity email: emails){
-					body += email.getProperty("title") + " by " + email.getProperty("user") + "\n";
-				}
-				dataStore.delete(emailKey);
-				msg.setText(body);
-				_logger.info("cron job has been executed");
-				
-				Transport.send(msg);
-		}
-		catch(Exception e) {
-			// log any exceptions that happen in cron job
-			_logger.info("fuck");
-		}
+			  msg.setFrom(new InternetAddress("michaelthilborn@gmail.com", "Example.com Admin"));
+			  msg.addRecipient(Message.RecipientType.TO,
+			                   new InternetAddress("mtrilborn@gmail.com", "Mr. User"));
+			  msg.setSubject("Your Example.com account has been activated");
+			  msg.setText("This is a test");
+			  Transport.send(msg);
+			} catch (Exception e) {
+			  // ...
+			}
 	}
 	
 	@Override

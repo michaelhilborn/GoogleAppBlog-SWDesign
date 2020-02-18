@@ -8,7 +8,7 @@
          
          <servlet-name>googleapp</servlet-name>
          <servlet-class>googleapp.googleServlet</servlet-class>
-		</servlet>
+		 </servlet>
  
 				<servlet>
                 <servlet-name>cronServlet</servlet-name>

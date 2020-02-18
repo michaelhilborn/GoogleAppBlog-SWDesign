@@ -60,7 +60,7 @@ Key googleappKey = KeyFactory.createKey("googleapp",googleappName);
 // run an ancestore query to ensure we see the most up-to-date
 // view of the greetings belonging to the selected googleapp
 
-	Query query = new Query("Greeting",googleappKey).addSort("user",Query.SortDirection.DESCENDING).addSort("date", Query.SortDirection.DESCENDING);
+	Query query = new Query("Greeting",googleappKey).addSort("date", Query.SortDirection.DESCENDING);
 	List<Entity> greetings = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
 	if(greetings.isEmpty()){
 %>
