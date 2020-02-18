@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+         
+         <servlet>
+         
+         <servlet-name>googleapp</servlet-name>
+         <servlet-class>googleapp.googleServlet</servlet-class>
+		</servlet> 
+		
+		<servlet>
+		<servlet-name>cronServlet</servlet-name>
+		<servlet-class>googleapp.cronServlet</servlet-class>
+		</servlet>
+		
+		<servlet>
+			<servlet-name>sign</servlet-name>
+			
+			<servlet-class>googleapp.SigngoogleappServlet</servlet-class>        
+         
+         </servlet>
+         
+         <servlet-mapping>
+         <servlet-name>cronServlet</servlet-name>
+         <!--   not really certain what this specific part does-->
+         <url-pattern>/cronJob</url-pattern>
+         </servlet-mapping>
+         
+         <servlet-mapping>
+         	<servlet-name>sign</servlet-name>
+         	<url-pattern>/sign</url-pattern>
+         </servlet-mapping>
+         
+         <servlet-mapping>
+         
+         	<servlet-name>googleapp</servlet-name>
+         	
+         	<url-pattern>/writeblog</url-pattern>
+         	
+         </servlet-mapping>
+         
+  <welcome-file-list>
+    <welcome-file>googleAppProject.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
